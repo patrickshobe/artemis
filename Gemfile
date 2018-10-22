@@ -50,7 +50,6 @@ group :development, :test do
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'pry'
-  gem 'simplecov'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'fuubar'
@@ -61,6 +60,13 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
+
+group :test do
+  gem 'simplecov'
+  gem 'vcr'
+  gem 'webmock'
+end
+
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
