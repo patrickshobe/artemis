@@ -10,4 +10,8 @@ class SonarrInterface
   def get_all_series
     JSON.parse(conn.get('/api/series').body, symbolize_names: true)
   end
+
+  def get_all_episodes(series_id)
+    JSON.parse(conn.get("/api/episodefile?seriesId=#{series_id}").body, symbolize_names: true)
+  end
 end
