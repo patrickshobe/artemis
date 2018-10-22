@@ -8,6 +8,6 @@ class SonarrInterface
   end
 
   def get_all_series
-    JSON.parse(conn.get('/api/series').body)
+    JSON.parse(conn.get('/api/series').body, symbolize_names: true)
   end
 end

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_012755) do
 
   create_table "series", force: :cascade do |t|
     t.string "title"
+    t.integer "sonarr_id"
     t.integer "season_count"
     t.integer "episode_count"
     t.bigint "size_on_disk"
