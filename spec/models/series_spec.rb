@@ -6,4 +6,6 @@ RSpec.describe Series, type: :model do
   it { should validate_presence_of :episode_count }
   it { should validate_presence_of :size_on_disk }
   it { should validate_presence_of :season_count }
+
+  it { should have_many :episodes }
 end

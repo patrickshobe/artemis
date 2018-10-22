@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Series Builder Service' do
-  it 'should be able to access Sonarr' do
+describe 'Season Builder Service' do
+  it 'should be able to build Seasons' do
 		si = SonarrInterface.new
 		response = si.get_all_series
 
