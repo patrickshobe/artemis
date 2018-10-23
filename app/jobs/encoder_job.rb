@@ -3,7 +3,12 @@ class EncoderJob < ApplicationJob
 
   def perform(path)
     movie = FFMPEG::Movie.new(path)
-    transcoded = movie.transcode("tmp/movie.mp4")
+    transcoded = movie.transcode(encoded_path(path))
+  end
 
+  private
+
+  def encoded_path(path)
+    path.chop.chop.chop + 'mp4'
   end
 end
