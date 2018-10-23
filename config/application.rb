@@ -29,5 +29,9 @@ module Artemis
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Background job framework
+    config.active_job.queue_adapter = :sidekiq
+
   end
 end

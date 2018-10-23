@@ -39,7 +39,18 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # figaro for api keys
 gem 'figaro'
 
+# faraday for API requests
 gem 'faraday'
+
+# FFMPEG to encode
+gem 'streamio-ffmpeg'
+
+# Redis for background job queue
+gem 'sidekiq'
+
+# For the Redis dashboard
+gem 'sinatra'
+
 
 
 group :development, :test do
