@@ -3,7 +3,7 @@ FactoryBot.define do
     title { "MyString" }
     season_count { 1 }
     episode_count { 1 }
-    size_on_disk { "" }
+    size_on_disk { 12345  }
     path { "MyString" }
   end
 end

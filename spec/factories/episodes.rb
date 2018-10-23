@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :episode do
-    series { nil }
+    series { 1 }
     season { 1 }
     path { "MyText" }
-    size { "" }
+    size { 123456 }
     audio { "MyString" }
     video { "MyString" }
-    encoded { "" }
+    encoded { false }
   end
 end
