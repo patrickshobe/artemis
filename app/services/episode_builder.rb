@@ -12,7 +12,8 @@ class EpisodeBuilder
   end
 
   def build_episode(episode)
-    episode = Episode.create( series_id: episode[:seriesId],
+    episode = Episode.create(
+      series_id: Series.find_by(sonarr_id: episode[:seriesId]).id,
                               season:    episode[:seasonNumber],
                               path:      episode[:path],
                               size:      episode[:size],
