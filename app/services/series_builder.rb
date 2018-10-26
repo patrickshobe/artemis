@@ -1,22 +1,26 @@
 class SeriesBuilder
 
-  def initialize(series_response)
-    @series_response = series_response
+  def initialize
+    build_all_series
   end
 
   def build_all_series
-    @series_response.each do |series|
+    get_series.each do |series|
       build_series(series)
     end
-    true
+  end
+
+  def get_series
+    SonarrInterface.new.get(:series)
   end
 
   def build_series(series)
-    series = Series.create(title: series[:title],
-                        sonarr_id: series[:id],
-                        season_count: series[:seasonCount],
-                        episode_count: series[:episodeCount],
-                        size_on_disk: series[:sizeOnDisk],
-                        path: series[:path])
+    Series.create(title: series[:title],
+                  sonarr_id: series[:id],
+                  season_count: series[:seasonCount],
+                  episode_count: series[:episodeCount],
+                  size_on_disk: series[:sizeOnDisk],
+                  path: series[:path])
+
   end
 end

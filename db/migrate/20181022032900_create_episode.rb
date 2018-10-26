@@ -3,6 +3,7 @@ class CreateEpisode < ActiveRecord::Migration[5.2]
     create_table :episodes do |t|
       t.references :series, foreign_key: true
       t.integer :season
+      t.integer :unique_id
       t.text :path
       t.bigint :size
       t.string :audio

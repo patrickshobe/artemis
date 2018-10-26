@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_032900) do
   create_table "episodes", force: :cascade do |t|
     t.bigint "series_id"
     t.integer "season"
+    t.integer "unique_id"
     t.text "path"
     t.bigint "size"
     t.string "audio"
