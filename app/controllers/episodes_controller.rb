@@ -6,7 +6,7 @@ class EpisodesController < ApplicationController
 
   def encode
     episode = Episode.find(params[:id])
-    EncoderJob.perform_later(episode.path)
+    EncoderJob.perform_later(episode)
     flash[:notice] = 'Encode Started'
     redirect_to episodes_path
   end
