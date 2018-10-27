@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   resources :episodes, only: [:index]
+  resources :encodes, only: [:index]
   get '/episodes/:id/encode', to: 'episodes#encode'
 end

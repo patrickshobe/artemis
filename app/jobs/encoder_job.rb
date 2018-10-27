@@ -21,7 +21,7 @@ class EncoderJob < ApplicationJob
   end
 
   def record_end_encode(encode_record, transcoded)
-    encode_Record.update( finished_at: Time.now,
+    encode_record.update( finished_at: Time.now,
                           final_size:  transcoded.size,
                           success:     transcoded.valid? )
   end

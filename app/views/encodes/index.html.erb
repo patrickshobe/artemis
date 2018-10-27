@@ -1,0 +1,8 @@
+<% @encodes.each do |encode| %>
+  <ul>
+    <li>ID:            <%= encode.id %></li>
+    <li>Successful:    <%= encode.success %></li>
+    <li>Elapsed Time:  <%= encode.created_at - encode.updated_at %></li>
+    <li>Space Savings: <%= encode.initial_size - encode.final_size %></li>
+  </ul>
+<% end %>
