@@ -7,5 +7,6 @@ FactoryBot.define do
     audio { "MyString" }
     video { "MyString" }
     encoded { false }
+    unique_id { '12345' }
   end
 end

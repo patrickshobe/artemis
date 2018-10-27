@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_032900) do
+ActiveRecord::Schema.define(version: 2018_10_26_174100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "encode_records", force: :cascade do |t|
+    t.bigint "episode_id"
+    t.boolean "success", default: false
+    t.datetime "finished_at"
+    t.bigint "initial_size"
+    t.bigint "final_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["episode_id"], name: "index_encode_records_on_episode_id"
+  end
 
   create_table "episodes", force: :cascade do |t|
     t.bigint "series_id"
@@ -40,5 +51,6 @@ ActiveRecord::Schema.define(version: 2018_10_22_032900) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "encode_records", "episodes"
   add_foreign_key "episodes", "series"
 end

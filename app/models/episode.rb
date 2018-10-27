@@ -8,4 +8,5 @@ class Episode < ApplicationRecord
   validates_uniqueness_of :unique_id
 
   belongs_to :series
+  has_many :encode_jobs
 end
