@@ -1,7 +1,7 @@
 class SeriesBuilder
 
-  def initialize
-    build_all_series
+  def self.build_all
+    new.build_all_series
   end
 
   def build_all_series
