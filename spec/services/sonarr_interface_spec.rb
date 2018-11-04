@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 describe 'Sonarr Interface Service' do
-  it 'should be able to access Sonarr' do
-    VCR.use_cassette('series') do
-		  si = SonarrInterface.new
-		  response = si.get_all_series
+  it 'should command sonarr to rescan for a series' do
+    VCR.use_cassette('command') do
+      response = EpisodeUpdater.new.send_api_update(1)
 
-		  expect(response.count).to eq(3)
-		  expect(response.first.keys).to include(:path)
+      expect(response[:body][:seriesId]).to eq(1)
+      expect(response[:body][:completionMessage]).to eq("Completed")
     end
   end
 end

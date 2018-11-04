@@ -12,24 +12,29 @@ class SonarrInterface
     parse( conn.get(request_url).body )
   end
 
+  def post(body)
+    response = conn.post(build_request[:rescan]) do |req|
+      req.body = body
+    end
+    parse(response.body)
+  end
+
   def parse(response_data)
     JSON.parse(response_data, symbolize_names: true)
   end
-
 
   def build_request(series_id = '')
     {
       series:       '/api/series',
       episode_file: "/api/episodefile?seriesId=#{series_id}",
-      episode:      "/api/episode?seriesId=#{series_id}"
+      episode:      "/api/episode?seriesId=#{series_id}",
+      rescan:       '/api/command'
     }
   end
 
-  def get_all_series
-    JSON.parse(conn.get('/api/series').body, symbolize_names: true)
-  end
-
-  def get_all_episodes(series_id)
-    JSON.parse(conn.get("/api/episodefile?seriesId=#{series_id}").body, symbolize_names: true)
+  def build_post_body(series_id)
+    { "name" => 'RescanSeries',
+      "seriesId" => series_id
+    }.to_json
   end
 end
