@@ -5,9 +5,8 @@ class Encoder
     transcoded = movie.transcode(encoded_path(raw_video.path))
     record_end_encode(encode_record, transcoded)
     remove_old_episode(raw_video)
+    EpisodeUpdater.update(raw_video)
   end
-
-  private
 
   def encoded_path(path)
     path.chop.chop.chop + 'mp4'

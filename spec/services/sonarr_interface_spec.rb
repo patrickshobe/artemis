@@ -11,7 +11,7 @@ describe 'Sonarr Interface Service' do
     VCR.use_cassette('command', :allow_unused_http_interactions => false) do
       response = EpisodeUpdater.update(1)
 
-      expect(response).to eq(true)
+      expect(response).to be_a(Series)
     end
   end
 end

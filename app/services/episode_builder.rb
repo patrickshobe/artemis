@@ -22,19 +22,26 @@ class EpisodeBuilder
     response
   end
 
+  def update_episode(episode)
+    episode = Episode.find_by(unique_id: episode.unique_id)
+    episode.delete
+    updated_info = SonarrInterface.new.get(:episode_file, episode.sonarr_id)
+  end
 
   def build_episode(episode)
-    binding.pry if episode[:seriesId].nil?
-    Episode.create(
-      series_id: Series.find_by(sonarr_id: episode[:seriesId]).id,
-      unique_id: episode[:seriesId].to_s + episode[:seasonNumber].to_s + episode[:id].to_s,
-                              season:    episode[:seasonNumber],
-                              path:      episode[:path],
-                              size:      episode[:size],
-                              audio:     episode[:mediaInfo][:audioCodec],
-                              video:     episode[:mediaInfo][:videoCodec],
-                              encoded:   check_encoded( episode ))
-
+    if episode[:seriesId].nil?
+      nil
+    else
+      Episode.create(
+        series_id: Series.find_by(sonarr_id: episode[:seriesId]).id,
+        unique_id: episode[:seriesId].to_s + episode[:seasonNumber].to_s + episode[:id].to_s,
+                                season:    episode[:seasonNumber],
+                                path:      episode[:path],
+                                size:      episode[:size],
+                                audio:     episode[:mediaInfo][:audioCodec],
+                                video:     episode[:mediaInfo][:videoCodec],
+                                encoded:   check_encoded( episode ))
+    end
   end
 
   def check_encoded(episode)

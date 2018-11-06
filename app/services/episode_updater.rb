@@ -10,12 +10,14 @@ class EpisodeUpdater
     updater.update_db
   end
 
+
   def get_update
     si = SonarrInterface.new()
   end
 
   def update_db
-    SeriesBuilder.update_series(@id)
+    binding.pry
+    EpisodeBuilder.update_episode(@id)
   end
 
   def send_api_update
@@ -40,6 +42,7 @@ class EpisodeUpdater
     while successful != false && runs < 16
       successful = validate_empty_job_queue
       runs += 1
+      sleep 1
     end
   end
 

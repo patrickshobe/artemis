@@ -16,13 +16,9 @@ class SeriesBuilder
 
   def self.update_series(series_id)
    series = Series.find(series_id)
+   series.delete
    updated_info = SonarrInterface.new.get(:single_series, series_id)
-   series.update(title:        updated_info[:title],
-                sonarr_id:     updated_info[:id],
-                season_count:  updated_info[:seasonCount],
-                episode_count: updated_info[:episodeCount],
-                size_on_disk:  updated_info[:sizeOnDisk],
-                path:          updated_info[:path])
+   new.build_series(updated_info)
   end
 
   def build_series(series)
