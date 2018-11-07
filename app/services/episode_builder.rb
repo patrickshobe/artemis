@@ -1,7 +1,7 @@
 class EpisodeBuilder
 
   def initialize
-    build_all_episodes
+    #build_all_episodes
   end
 
   def build_all_episodes
@@ -22,10 +22,25 @@ class EpisodeBuilder
     response
   end
 
-  def update_episode(episode)
-    episode = Episode.find_by(unique_id: episode.unique_id)
-    episode.delete
-    updated_info = SonarrInterface.new.get(:episode_file, episode.sonarr_id)
+  def update_series(series_id)
+    get_episodes_for_series(series_id).each do |episode|
+      update_episode(episode)
+    end
+  end
+
+  def update_episode(episode_response)
+    ep = Episode.find_or_create_by(unique_id: episode_response[:unique_id]) do |episode|
+      episode.update_attributes( series_id: Series.find_by(sonarr_id: episode_response[:seriesId]).id,
+                                 unique_id: episode_response[:seriesId].to_s + episode_response[:seasonNumber].to_s + episode_response[:id].to_s,
+                                 season:    episode_response[:seasonNumber],
+                                 path:      episode_response[:path],
+                                 size:      episode_response[:size],
+                                 audio:     episode_response[:mediaInfo][:audioCodec],
+                                 video:     episode_response[:mediaInfo][:videoCodec],
+                                 encoded:   check_encoded( episode_response )
+      )
+
+    end
   end
 
   def build_episode(episode)

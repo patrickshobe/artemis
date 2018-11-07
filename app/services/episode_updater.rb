@@ -11,13 +11,8 @@ class EpisodeUpdater
   end
 
 
-  def get_update
-    si = SonarrInterface.new()
-  end
-
   def update_db
-    binding.pry
-    EpisodeBuilder.update_episode(@id)
+    EpisodeBuilder.update_series(@id.series.sonarr_id)
   end
 
   def send_api_update

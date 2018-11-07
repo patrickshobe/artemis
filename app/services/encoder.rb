@@ -5,7 +5,7 @@ class Encoder
     transcoded = movie.transcode(encoded_path(raw_video.path))
     record_end_encode(encode_record, transcoded)
     remove_old_episode(raw_video)
-    EpisodeUpdater.update(raw_video)
+    EpisodeBuilder.new.update_series(raw_video.series.sonarr_id)
   end
 
   def encoded_path(path)
