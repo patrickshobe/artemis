@@ -29,11 +29,12 @@ class SonarrInterface
 
   def build_request(id = '')
     {
-      single_series: "/api/series/#{id}",
-      series:        '/api/series',
-      episode_file:  "/api/episodefile?seriesId=#{id}",
-      episode:       "/api/episode?seriesId=#{id}",
-      command:       '/api/command'
+      single_series:  "/api/series/#{id}",
+      series:         '/api/series',
+      episode_files:  "/api/episodefile?seriesId=#{id}",
+      episode_file:   "/api/episodefile/#{id}",
+      episode:        "/api/episode?seriesId=#{id}",
+      command:        '/api/command'
     }
   end
 

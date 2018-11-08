@@ -6,4 +6,11 @@ Rails.application.routes.draw do
   resources :episodes, only: [:index]
   resources :encodes, only: [:index]
   get '/episodes/:id/encode', to: 'episodes#encode'
+
+  namespace :api do
+    namespace :v1 do
+      resources :episodes, only: [:index]
+    end
+
+  end
 end

@@ -28,10 +28,17 @@ ActiveRecord::Schema.define(version: 2018_10_26_174100) do
 
   create_table "episodes", force: :cascade do |t|
     t.bigint "series_id"
-    t.integer "season"
-    t.integer "unique_id"
+    t.integer "episode_file_id"
+    t.integer "season_number"
+    t.integer "episode_number"
+    t.text "title"
+    t.date "air_date"
+    t.boolean "has_file"
+    t.integer "absolute_episode_number"
+    t.integer "sonarr_id"
     t.text "path"
     t.bigint "size"
+    t.date "date_added"
     t.string "audio"
     t.string "video"
     t.boolean "encoded", default: false
