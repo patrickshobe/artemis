@@ -1,24 +1,26 @@
-# README
+# artemis
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+artemis is my attempt at implementing a distributed media transcoding application.
 
-Things you may want to cover:
+## Main Details
 
-* Ruby version
+I use [Plex Media Server](www.plex.tv), to host of all of my personal media,
+the majority of the media is being consumned by low end streaming devices that
+do not support more modern video formats. This causes the server to have to
+transcode the video into an older format on the fly and quickly becomes problematic
+as you add more concurrent streams. To avoid this I generally try and
+encode media into the more universally playable .mp4 (AAC, h264) format.
+This is genereally an arduous process of creating queus and kicking off
+jobs during non peak hours, it's nearly impossible to keep up with the
+incoming amount of media. Artemis aims to solve this problem by interfacing
+with the main media retrieval services [sonarr](www.sonarr.tv) and
+[radarr](www.radarr.video) and having a controller - worker remote encoding server
+implementation utilizing other computers on the local network.
 
-* System dependencies
+![](https://imgur.com/a/gQNcCOo)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Current Implementation
+This was originally created to just run on one computer so the current code
+heavily reflects that. I'll start working towards a more distributed
+architecture from here on out. I also think the controller and worker need to
+be seperate apps, this should allow for more diversification in the future.

@@ -43,7 +43,7 @@ class EpisodeBuilder
                     date_added:       updated_info[:episodeFile][:dateAdded],
                     audio:     updated_info[:episodeFile][:mediaInfo][:audioCodec],
                     video:     updated_info[:episodeFile][:mediaInfo][:videoCodec],
-                    encoded:          new.check_encoded( updated_info[:episodeFile] ))
+                    encoded:          true )
   end
 
   def get_episodes(series_id)
