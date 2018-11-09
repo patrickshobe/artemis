@@ -1,0 +1,11 @@
+
+
+<%= @series.title %>
+<% @series.episodes.all.each do |episode| %>
+  <ul>
+    <li><%= episode.title %></li>
+    <li><%= episode.encoded %></li>
+    <li><%= episode.path %></li>
+  <li><%= link_to 'Encode', "/episodes/#{episode.id}/encode" %></li>
+  </ul>
+<% end %>

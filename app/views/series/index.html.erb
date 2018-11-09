@@ -1,0 +1,6 @@
+<% @series.each do |series|  %>
+  <ul>
+    <li> <%= series.id %></li>
+    <li><%= link_to series.title, series_path(series) %></li>
+  </ul>
+<% end %>

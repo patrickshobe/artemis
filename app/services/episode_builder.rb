@@ -61,6 +61,6 @@ class EpisodeBuilder
   end
 
   def check_encoded(episode)
-    episode[:mediaInfo][:audioCodec] == 'AAC' && (episode[:mediaInfo][:videoCodec] == 'x264' || episode[:mediaInfo][:videoCodec] == 'h264')
+    episode[:mediaInfo][:audioCodec] == 'AAC' && episode[:mediaInfo][:videoCodec] == 'h264'
   end
 end
