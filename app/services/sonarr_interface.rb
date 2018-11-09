@@ -31,9 +31,8 @@ class SonarrInterface
     {
       single_series:  "/api/series/#{id}",
       series:         '/api/series',
-      episode_files:  "/api/episodefile?seriesId=#{id}",
-      episode_file:   "/api/episodefile/#{id}",
-      episode:        "/api/episode?seriesId=#{id}",
+      episodes:        "/api/episode?seriesId=#{id}",
+      episode:        "/api/episode/#{id}",
       command:        '/api/command'
     }
   end

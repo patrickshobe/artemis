@@ -1,18 +1,19 @@
 class EpisodeUpdater
-  def initialize(series_id)
-    @id = series_id
+  def initialize(episode)
+    @episode = episode
+    @id = episode.series.id
   end
 
-  def self.update(series_id)
-    updater = new(series_id)
+  def self.update(episode)
+    updater = new(episode)
     updater.send_api_update
     updater.wait_for_job_success
+    sleep 30
     updater.update_db
   end
 
-
   def update_db
-    EpisodeBuilder.update_series(@id.series.sonarr_id)
+    EpisodeBuilder.update_episode(@episode)
   end
 
   def send_api_update
