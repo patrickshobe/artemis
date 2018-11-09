@@ -17,7 +17,7 @@ with the main media retrieval services [sonarr](www.sonarr.tv) and
 [radarr](www.radarr.video) and having a controller - worker remote encoding server
 implementation utilizing other computers on the local network.
 
-![](https://imgur.com/a/gQNcCOo)
+![](https://i.imgur.com/fdXQPl5.png)
 
 ### Current Implementation
 This was originally created to just run on one computer so the current code
