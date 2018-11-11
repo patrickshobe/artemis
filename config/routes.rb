@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :episodes, only: [:index]
       resources :encodes, only: [:update]
+      resources :encode_records, only: [:update, :create, :show]
     end
 
   end

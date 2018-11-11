@@ -6,6 +6,6 @@
     <li><%= episode.title %></li>
     <li><%= episode.encoded %></li>
     <li><%= episode.path %></li>
-  <li><%= link_to 'Encode', "/episodes/#{episode.id}/encode" %></li>
+    <li><%= link_to 'Encode', api_v1_encode_records_path(episode.id), method: :post %></li>
   </ul>
 <% end %>
