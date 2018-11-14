@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_174100) do
+ActiveRecord::Schema.define(version: 2018_11_11_231447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 2018_10_26_174100) do
     t.bigint "final_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "workers_id"
+    t.datetime "started_at"
     t.index ["episode_id"], name: "index_encode_records_on_episode_id"
+    t.index ["workers_id"], name: "index_encode_records_on_workers_id"
   end
 
   create_table "episodes", force: :cascade do |t|
@@ -54,6 +57,14 @@ ActiveRecord::Schema.define(version: 2018_10_26_174100) do
     t.integer "episode_count"
     t.bigint "size_on_disk"
     t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workers", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "access_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
