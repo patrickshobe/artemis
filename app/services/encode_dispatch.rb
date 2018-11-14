@@ -1,32 +1,39 @@
 class EncodeDispatch
 
-  def initialize( path, video_id )
-    @path = path
-    @video_id = video_id
-    @record = nil
+  def initialize( worker_id )
+    @worker_id = worker_id
   end
 
-  def self.dispatch( path, video_id )
-    dispatcher = new( path, video_id )
+  def self.dispatch( worker )
+    dispatcher = new( worker )
     dispatcher.dispatch_job
   end
 
   def dispatch_job
-    create_encode_record
-    ApolloInterface.quick_post( @path, build_post_body)
+    update_encode_record
+    ApolloInterface.quick_post( worker.location, build_post_body)
   end
 
-  def create_encode_record
-    @record = EncodeRecord.create( episode:      video,
-                                   initial_size: video.size )
+  def update_encode_record
+    next_encode.update( workers_id: worker.id,
+                        started_at: Time.now,
+                        initial_size: video.size )
   end
 
   def video
-    @video ||= Episode.find( @video_id )
+    @video ||= next_encode.episode
   end
 
   def build_post_body
-    { id:   @record.id,
+    { id:   next_encode.id,
       path: video.path }.to_json
+  end
+
+  def next_encode
+    @encode ||= EncodeRecord.next_encode
+  end
+
+  def worker
+    @worker ||= Worker.find(@worker_id)
   end
 end
