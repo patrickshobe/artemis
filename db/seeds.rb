@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Builds All Series and then the episodes for those series
+
+SeriesBuilder.build_all
+EpisodeBuilder.build_all
+
+# Creates the two apoolo workers
+Worker.create( name: 'apollo-1',
+               location: 'http://192.168.0.36:3100',
+               access_token: 'XJwOmou4jaiyFWx4Q2SM6Q' )
+
+Worker.create( name: 'apollo-2',
+               location: 'http://192.168.0.35:3100',
+               access_token: 'd5HYJMvYKS0_5QiiLtrVDw')
