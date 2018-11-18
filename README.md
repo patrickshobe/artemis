@@ -20,7 +20,5 @@ implementation utilizing other computers on the local network.
 ![](https://i.imgur.com/fdXQPl5.png)
 
 ### Current Implementation
-This was originally created to just run on one computer so the current code
-heavily reflects that. I'll start working towards a more distributed
-architecture from here on out. I also think the controller and worker need to
-be seperate apps, this should allow for more diversification in the future.
+Artemis and Apollo are currently working together. Aretmis can queue and dispatch encode
+jobs to multiple apollo workers. 
