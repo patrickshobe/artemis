@@ -10,8 +10,7 @@ class Api::V1::EncodeRecordsController < ApplicationController
     worker = Worker.find_by( access_token: request.headers['IDENTITY'])
     encode.update( finished_at: Time.now,
                    success: true)
-    EpisodeUpdater.update(encode.episode)
+    EpisodeUpdaterJob.perform_later(encode.episode)
     EncodeDispatch.dispatch( worker.id )
-
   end
 end
