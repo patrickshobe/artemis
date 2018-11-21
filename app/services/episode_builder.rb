@@ -6,6 +6,36 @@ class EpisodeBuilder
     end
   end
 
+  def self.update_all
+    Series.all.each do |series|
+      new.update_for_series(series.id)
+    end
+  end
+
+  def update_for_series(series_id)
+    eliminate_missing_episodes(series_id).each do |episode|
+      series = Series.find(series_id)
+      Episode.find_or_initialize_by(sonarr_id: episode[:id]).update_attributes(
+                      series:           series,
+                      episode_file_id:  episode[:episodeFileId],
+                      season_number:    episode[:seasonNumber],
+                      episode_number:   episode[:episodeNumber],
+                      title:            episode[:title],
+                      air_date:         episode[:airDate],
+                      has_file:         episode[:hasFile],
+                      absolute_episode_number: episode[:absoluteEpisodeNumber],
+                      sonarr_id:        episode[:id],
+                      path:             episode[:episodeFile][:path],
+                      size:             episode[:episodeFile][:size],
+                      date_added:       episode[:episodeFile][:dateAdded],
+                      audio:     episode[:episodeFile][:mediaInfo][:audioCodec],
+                      video:     episode[:episodeFile][:mediaInfo][:videoCodec],
+                      encoded:          check_encoded( episode[:episodeFile] ),
+                      type:             get_filetype(episode))
+    end
+  end
+
+
   def build_for_series(series_id)
     eliminate_missing_episodes(series_id).each do |episode|
       series = Series.find(series_id)
@@ -23,7 +53,8 @@ class EpisodeBuilder
                       date_added:       episode[:episodeFile][:dateAdded],
                       audio:     episode[:episodeFile][:mediaInfo][:audioCodec],
                       video:     episode[:episodeFile][:mediaInfo][:videoCodec],
-                      encoded:          check_encoded( episode[:episodeFile] ))
+                      encoded:          check_encoded( episode[:episodeFile] ),
+                      type:             get_filetype(episode))
     end
   end
 
@@ -43,7 +74,8 @@ class EpisodeBuilder
                     date_added:       updated_info[:episodeFile][:dateAdded],
                     audio:     updated_info[:episodeFile][:mediaInfo][:audioCodec],
                     video:     updated_info[:episodeFile][:mediaInfo][:videoCodec],
-                    encoded:          true )
+                    encoded:          true,
+                    type:             get_filetype(episode))
   end
 
   def get_episodes(series_id)
@@ -62,5 +94,9 @@ class EpisodeBuilder
 
   def check_encoded(episode)
     episode[:mediaInfo][:audioCodec] == 'AAC' && episode[:mediaInfo][:videoCodec] == 'h264'
+  end
+
+  def get_filetype(episode)
+    episode[:episodeFile][:path].chars.last(3).join
   end
 end
