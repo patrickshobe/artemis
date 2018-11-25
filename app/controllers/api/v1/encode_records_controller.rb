@@ -1,6 +1,10 @@
 class Api::V1::EncodeRecordsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def index
+    render json: EncodeRecord.all
+  end
+
   def create
     EncodeRecord.create(episode_id: params[:format])
   end
