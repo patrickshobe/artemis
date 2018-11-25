@@ -31,7 +31,7 @@ class EpisodeBuilder
                       audio:     episode[:episodeFile][:mediaInfo][:audioCodec],
                       video:     episode[:episodeFile][:mediaInfo][:videoCodec],
                       encoded:          check_encoded( episode[:episodeFile] ),
-                      type:             get_filetype(episode))
+                      file_type:             get_filetype(episode))
     end
   end
 
@@ -54,7 +54,7 @@ class EpisodeBuilder
                       audio:     episode[:episodeFile][:mediaInfo][:audioCodec],
                       video:     episode[:episodeFile][:mediaInfo][:videoCodec],
                       encoded:          check_encoded( episode[:episodeFile] ),
-                      type:             get_filetype(episode))
+                      file_type:             get_filetype(episode))
     end
   end
 
@@ -75,7 +75,7 @@ class EpisodeBuilder
                     audio:     updated_info[:episodeFile][:mediaInfo][:audioCodec],
                     video:     updated_info[:episodeFile][:mediaInfo][:videoCodec],
                     encoded:          true,
-                    type:             get_filetype(episode))
+                    file_type:             get_filetype(episode))
   end
 
   def get_episodes(series_id)
