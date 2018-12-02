@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :series, only: [:index]
       resources :encodes, only: [:update]
       resources :encode_records, only: [:update, :create, :show, :index]
+      get '/encode_numbers', to: 'encode_records#encode_numbers'
+      get '/encodes_by_day', to: 'encode_records#encodes_by_day'
     end
 
   end
