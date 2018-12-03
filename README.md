@@ -22,3 +22,44 @@ implementation utilizing other computers on the local network.
 ### Current Implementation
 Artemis and Apollo are currently working together. Aretmis can queue and dispatch encode
 jobs to multiple apollo workers. 
+
+## Endpoints
+
+All endpoints are prepended by `/api/v1`
+
+#### Encode Numbers
+Returns the distribution of encodes by status, accepts a get with no header of body
+```
+{ pending: 3000,
+  completed: 250,
+  percentage: 10% }
+```
+
+### Encodes By Day
+Returns the number of encodes completed by day, accepts a get with no header or body. 
+```
+{ 2018-01-01: 10,
+  2018-01-02: 12,
+  2018-01-03: 6 }
+```
+
+### Pending Encodes
+Returns the currently running encodes, accepts a get with no header or body. 
+```
+{ worker: apollo-1,
+  title: episode-title,
+  series: series-name,
+  season: 1,
+  episode: 2,
+  age: 20.47 }
+```
+### Recent Encodes 
+Returns the last 10 encode record, accepts a get with no header or body. 
+```
+[{ worker: apollo-1,
+  title: episode-title,
+  series: series-name,
+  season: 1,
+  episode: 2,
+  age: 20.47 }]
+```
